@@ -6,6 +6,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
+	site: 'https://jijouji0708.github.io',
+	base: '/ai-pulse',
 	integrations: [mdx(), sitemap()],
 });
