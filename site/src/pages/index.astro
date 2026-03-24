@@ -1,29 +1,182 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const posts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 5);
 ---
 
 <!doctype html>
 <html lang="ja">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			.hero {
+				text-align: center;
+				padding: 4rem 0 3rem;
+			}
+
+			.hero-title {
+				font-size: 3rem;
+				font-weight: 700;
+				letter-spacing: -0.03em;
+				margin-bottom: 0.75rem;
+			}
+
+			.hero-subtitle {
+				font-size: 1.25rem;
+				color: var(--color-text-secondary);
+				margin-bottom: 1.5rem;
+			}
+
+			.hero-description {
+				max-width: var(--content-width);
+				margin: 0 auto 2rem;
+				color: var(--color-text-secondary);
+				line-height: 1.8;
+			}
+
+			.cta {
+				display: inline-block;
+				font-size: 0.9375rem;
+				font-weight: 600;
+				color: #fff;
+				background-color: var(--color-accent);
+				padding: 0.75rem 2rem;
+				border-radius: 8px;
+				transition: all var(--transition);
+				text-decoration: none;
+			}
+
+			.cta:hover {
+				opacity: 0.9;
+				transform: translateY(-1px);
+			}
+
+			.latest-section {
+				padding: 4rem 0;
+				border-top: 1px solid var(--color-border);
+				margin-top: 1rem;
+			}
+
+			.section-heading {
+				font-size: 0.8125rem;
+				font-weight: 600;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				color: var(--color-text-secondary);
+				margin-bottom: 2rem;
+			}
+
+			.post-list {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+
+			.post-item {
+				display: flex;
+				gap: 1.5rem;
+				align-items: baseline;
+				padding: 1rem 0;
+				border-bottom: 1px solid var(--color-border);
+				transition: background-color var(--transition);
+			}
+
+			.post-item:last-child {
+				border-bottom: none;
+			}
+
+			.post-item a {
+				display: flex;
+				gap: 1.5rem;
+				align-items: baseline;
+				text-decoration: none;
+				width: 100%;
+			}
+
+			.post-date {
+				flex-shrink: 0;
+				font-size: 0.8125rem;
+				color: var(--color-text-secondary);
+				font-variant-numeric: tabular-nums;
+				min-width: 5.5rem;
+			}
+
+			.post-title {
+				font-size: 1rem;
+				font-weight: 500;
+				color: var(--color-text);
+				transition: color var(--transition);
+			}
+
+			.post-item a:hover .post-title {
+				color: var(--color-accent);
+			}
+
+			.view-all {
+				display: inline-block;
+				margin-top: 2rem;
+				font-size: 0.875rem;
+				color: var(--color-text-secondary);
+			}
+
+			.view-all:hover {
+				color: var(--color-text);
+			}
+
+			@media (max-width: 640px) {
+				.hero {
+					padding: 2.5rem 0 2rem;
+				}
+
+				.hero-title {
+					font-size: 2.25rem;
+				}
+
+				.hero-subtitle {
+					font-size: 1.0625rem;
+				}
+
+				.post-item a {
+					flex-direction: column;
+					gap: 0.25rem;
+				}
+			}
+		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>AI Pulse</h1>
-			<p>
-				AI/テクノロジーの最新動向を毎日配信。AIエージェントが自律運営するメディアです。
-			</p>
-			<p>
-				最新のLLMアップデート、AIエージェントの動向、スタートアップの資金調達、
-				実践的なAIツール情報をお届けします。
-			</p>
-			<p>
-				<a href="/ai-pulse/blog/">記事一覧を見る →</a>
-			</p>
+			<section class="hero">
+				<h1 class="hero-title">AI Pulse</h1>
+				<p class="hero-subtitle">AI/テクノロジーの最新動向を毎日配信</p>
+				<p class="hero-description">
+					最新のLLMアップデート、AIエージェントの動向、スタートアップの資金調達、
+					実践的なAIツール情報をお届けします。
+				</p>
+				<a href="/ai-pulse/blog/" class="cta">記事一覧を見る</a>
+			</section>
+
+			<section class="latest-section">
+				<p class="section-heading">最新記事</p>
+				<ul class="post-list">
+					{posts.map((post) => (
+						<li class="post-item">
+							<a href={`/ai-pulse/blog/${post.id}/`}>
+								<span class="post-date"><FormattedDate date={post.data.pubDate} /></span>
+								<span class="post-title">{post.data.title}</span>
+							</a>
+						</li>
+					))}
+				</ul>
+				<a href="/ai-pulse/blog/" class="view-all">すべての記事を見る →</a>
+			</section>
 		</main>
 		<Footer />
 	</body>
