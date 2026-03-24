@@ -1,34 +1,80 @@
 /* ============================================
    AI Pulse Design System
-   Inspired by Apple HIG, Stripe, Linear, Vercel
+   Vercel/Linear-inspired, Stripe colors,
+   Japanese-optimized typography
    ============================================ */
 
 /* --- Design Tokens --- */
 :root {
+  /* Colors - Light Mode (Stripe-inspired) */
   --color-bg: #FFFFFF;
-  --color-bg-subtle: #FAFAFA;
+  --color-bg-sub: #F6F9FC;
+  --color-bg-elevated: #FFFFFF;
   --color-text: #1A1A1A;
   --color-text-secondary: #6B7280;
+  --color-text-tertiary: #9CA3AF;
   --color-accent: #635BFF;
+  --color-accent-hover: #5249E6;
+  --color-accent-subtle: rgba(99, 91, 255, 0.08);
   --color-border: #E5E7EB;
+  --color-border-subtle: #F0F0F0;
 
+  /* Fonts */
   --font-sans: "Noto Sans JP", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --font-mono: "Geist Mono", "SF Mono", Consolas, "Liberation Mono", monospace;
 
+  /* Layout */
   --content-width: 680px;
   --wide-width: 960px;
+  --header-height: 56px;
 
+  /* Spacing (8px grid) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
   --transition: 200ms ease;
+  --transition-slow: 300ms ease;
 }
 
+/* --- Dark Mode --- */
 @media (prefers-color-scheme: dark) {
   :root {
     --color-bg: #0A0A0A;
-    --color-bg-subtle: #141414;
+    --color-bg-sub: #141414;
+    --color-bg-elevated: #1A1A1A;
     --color-text: #EDEDED;
     --color-text-secondary: #A1A1A1;
+    --color-text-tertiary: #6B6B6B;
     --color-accent: #848CD0;
+    --color-accent-hover: #9BA2E0;
+    --color-accent-subtle: rgba(132, 140, 208, 0.1);
     --color-border: #2A2A2A;
+    --color-border-subtle: #1F1F1F;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -42,6 +88,8 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + var(--space-6));
 }
 
 body {
@@ -59,10 +107,17 @@ body {
   font-feature-settings: "palt";
   overflow-wrap: break-word;
   word-break: auto-phrase;
+  min-height: 100vh;
+}
+
+/* --- Selection --- */
+::selection {
+  background-color: var(--color-accent-subtle);
+  color: var(--color-text);
 }
 
 /* --- Typography --- */
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, h6 {
   margin: 0 0 0.5rem 0;
   font-weight: 700;
   line-height: 1.3;
@@ -83,24 +138,30 @@ p {
 a {
   color: var(--color-accent);
   text-decoration: none;
-  transition: color var(--transition);
+  transition: color var(--transition-fast);
 }
 
 a:hover {
-  color: var(--color-text);
+  color: var(--color-accent-hover);
 }
 
 strong, b {
   font-weight: 700;
 }
 
+small {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+/* --- Code --- */
 code {
   font-family: var(--font-mono);
   font-size: 0.875em;
   padding: 0.15em 0.4em;
-  background-color: var(--color-bg-subtle);
+  background-color: var(--color-bg-sub);
   border: 1px solid var(--color-border);
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
 }
 
 pre {
@@ -108,9 +169,9 @@ pre {
   font-size: 0.875em;
   line-height: 1.6;
   padding: 1.25em 1.5em;
-  background-color: var(--color-bg-subtle);
+  background-color: var(--color-bg-sub);
   border: 1px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   overflow-x: auto;
 }
 
@@ -119,20 +180,23 @@ pre > code {
   font-family: inherit;
 }
 
+/* --- Blockquote --- */
 blockquote {
   margin: 1.5em 0;
   padding: 0 0 0 1.25em;
-  border-left: 3px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
   color: var(--color-text-secondary);
   font-style: normal;
 }
 
+/* --- HR --- */
 hr {
   border: none;
   border-top: 1px solid var(--color-border);
   margin: 2em 0;
 }
 
+/* --- Table --- */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -148,15 +212,16 @@ th, td {
 th {
   font-weight: 600;
   color: var(--color-text-secondary);
-  font-size: 0.875em;
+  font-size: 0.8125rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
+/* --- Image --- */
 img {
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 /* --- Layout --- */
@@ -164,7 +229,7 @@ main {
   width: var(--wide-width);
   max-width: calc(100% - 3rem);
   margin: 0 auto;
-  padding: 3rem 0;
+  padding: var(--space-12) 0;
 }
 
 /* --- Prose (article content) --- */
@@ -176,6 +241,8 @@ main {
 .prose h2 {
   margin-top: 2.5em;
   margin-bottom: 0.75em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .prose h3 {
@@ -197,9 +264,19 @@ main {
   margin-bottom: 0.5em;
 }
 
+.prose li::marker {
+  color: var(--color-text-tertiary);
+}
+
 .prose a {
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 1px;
+}
+
+.prose a:hover {
+  text-decoration-color: var(--color-accent-hover);
 }
 
 .prose blockquote {
@@ -245,6 +322,6 @@ main {
 
   main {
     max-width: calc(100% - 2rem);
-    padding: 2rem 0;
+    padding: var(--space-8) 0;
   }
 }

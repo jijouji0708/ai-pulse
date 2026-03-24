@@ -16,63 +16,135 @@ const posts = (await getCollection('blog'))
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
+			/* Hero */
 			.hero {
-				text-align: center;
-				padding: 4rem 0 3rem;
+				padding: var(--space-16) 0 var(--space-12);
+				max-width: var(--content-width);
+				margin: 0 auto;
+			}
+
+			.hero-badge {
+				display: inline-flex;
+				align-items: center;
+				gap: var(--space-2);
+				font-size: 0.8125rem;
+				font-weight: 500;
+				color: var(--color-accent);
+				background: var(--color-accent-subtle);
+				padding: var(--space-1) var(--space-3);
+				border-radius: 100px;
+				margin-bottom: var(--space-6);
+			}
+
+			.hero-badge-dot {
+				width: 6px;
+				height: 6px;
+				border-radius: 50%;
+				background: var(--color-accent);
+				animation: pulse-dot 2s ease-in-out infinite;
+			}
+
+			@keyframes pulse-dot {
+				0%, 100% { opacity: 1; }
+				50% { opacity: 0.4; }
 			}
 
 			.hero-title {
 				font-size: 3rem;
 				font-weight: 700;
 				letter-spacing: -0.03em;
-				margin-bottom: 0.75rem;
-			}
-
-			.hero-subtitle {
-				font-size: 1.25rem;
-				color: var(--color-text-secondary);
-				margin-bottom: 1.5rem;
+				line-height: 1.15;
+				margin-bottom: var(--space-5);
 			}
 
 			.hero-description {
-				max-width: var(--content-width);
-				margin: 0 auto 2rem;
+				font-size: 1.125rem;
 				color: var(--color-text-secondary);
 				line-height: 1.8;
+				margin-bottom: var(--space-8);
+				max-width: 540px;
 			}
 
-			.cta {
-				display: inline-block;
+			.hero-actions {
+				display: flex;
+				gap: var(--space-3);
+				align-items: center;
+			}
+
+			.cta-primary {
+				display: inline-flex;
+				align-items: center;
+				gap: var(--space-2);
 				font-size: 0.9375rem;
 				font-weight: 600;
-				color: #fff;
+				color: #FFFFFF;
 				background-color: var(--color-accent);
-				padding: 0.75rem 2rem;
-				border-radius: 8px;
-				transition: all var(--transition);
+				padding: 0.625rem 1.5rem;
+				border-radius: var(--radius-md);
+				transition: all var(--transition-fast);
 				text-decoration: none;
 			}
 
-			.cta:hover {
-				opacity: 0.9;
+			.cta-primary:hover {
+				background-color: var(--color-accent-hover);
+				color: #FFFFFF;
 				transform: translateY(-1px);
+				box-shadow: var(--shadow-md);
 			}
 
+			.cta-secondary {
+				display: inline-flex;
+				align-items: center;
+				gap: var(--space-2);
+				font-size: 0.9375rem;
+				font-weight: 500;
+				color: var(--color-text-secondary);
+				padding: 0.625rem 1.25rem;
+				border-radius: var(--radius-md);
+				transition: all var(--transition-fast);
+				text-decoration: none;
+			}
+
+			.cta-secondary:hover {
+				color: var(--color-text);
+			}
+
+			/* Latest Posts */
 			.latest-section {
-				padding: 4rem 0;
-				border-top: 1px solid var(--color-border);
-				margin-top: 1rem;
+				padding: var(--space-12) 0 0;
 			}
 
-			.section-heading {
-				font-size: 0.8125rem;
+			.section-header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin-bottom: var(--space-6);
+				padding-bottom: var(--space-4);
+				border-bottom: 1px solid var(--color-border);
+			}
+
+			.section-title {
+				font-size: 0.75rem;
 				font-weight: 600;
 				text-transform: uppercase;
-				letter-spacing: 0.08em;
+				letter-spacing: 0.1em;
 				color: var(--color-text-secondary);
-				margin-bottom: 2rem;
+				margin: 0;
 			}
 
+			.view-all {
+				font-size: 0.8125rem;
+				font-weight: 500;
+				color: var(--color-text-secondary);
+				text-decoration: none;
+				transition: color var(--transition-fast);
+			}
+
+			.view-all:hover {
+				color: var(--color-accent);
+			}
+
+			/* Post list */
 			.post-list {
 				list-style: none;
 				margin: 0;
@@ -80,30 +152,32 @@ const posts = (await getCollection('blog'))
 			}
 
 			.post-item {
-				display: flex;
-				gap: 1.5rem;
-				align-items: baseline;
-				padding: 1rem 0;
-				border-bottom: 1px solid var(--color-border);
-				transition: background-color var(--transition);
+				border-bottom: 1px solid var(--color-border-subtle);
 			}
 
 			.post-item:last-child {
 				border-bottom: none;
 			}
 
-			.post-item a {
+			.post-link {
 				display: flex;
-				gap: 1.5rem;
+				gap: var(--space-6);
 				align-items: baseline;
+				padding: var(--space-4) var(--space-3);
+				margin: 0 calc(-1 * var(--space-3));
 				text-decoration: none;
-				width: 100%;
+				border-radius: var(--radius-md);
+				transition: background-color var(--transition-fast);
+			}
+
+			.post-link:hover {
+				background-color: var(--color-bg-sub);
 			}
 
 			.post-date {
 				flex-shrink: 0;
 				font-size: 0.8125rem;
-				color: var(--color-text-secondary);
+				color: var(--color-text-tertiary);
 				font-variant-numeric: tabular-nums;
 				min-width: 5.5rem;
 			}
@@ -112,40 +186,41 @@ const posts = (await getCollection('blog'))
 				font-size: 1rem;
 				font-weight: 500;
 				color: var(--color-text);
-				transition: color var(--transition);
+				transition: color var(--transition-fast);
 			}
 
-			.post-item a:hover .post-title {
+			.post-link:hover .post-title {
 				color: var(--color-accent);
 			}
 
-			.view-all {
-				display: inline-block;
-				margin-top: 2rem;
-				font-size: 0.875rem;
-				color: var(--color-text-secondary);
-			}
-
-			.view-all:hover {
-				color: var(--color-text);
-			}
-
+			/* Mobile */
 			@media (max-width: 640px) {
 				.hero {
-					padding: 2.5rem 0 2rem;
+					padding: var(--space-10) 0 var(--space-8);
 				}
 
 				.hero-title {
-					font-size: 2.25rem;
+					font-size: 2rem;
 				}
 
-				.hero-subtitle {
-					font-size: 1.0625rem;
+				.hero-description {
+					font-size: 1rem;
 				}
 
-				.post-item a {
+				.hero-actions {
 					flex-direction: column;
-					gap: 0.25rem;
+					align-items: flex-start;
+				}
+
+				.post-link {
+					flex-direction: column;
+					gap: var(--space-1);
+				}
+
+				.section-header {
+					flex-direction: column;
+					align-items: flex-start;
+					gap: var(--space-2);
 				}
 			}
 		</style>
@@ -154,28 +229,41 @@ const posts = (await getCollection('blog'))
 		<Header />
 		<main>
 			<section class="hero">
-				<h1 class="hero-title">AI Pulse</h1>
-				<p class="hero-subtitle">AI/テクノロジーの最新動向を毎日配信</p>
+				<div class="hero-badge">
+					<span class="hero-badge-dot"></span>
+					毎日更新中
+				</div>
+				<h1 class="hero-title">AI/テクノロジーの<br />最前線をお届け</h1>
 				<p class="hero-description">
 					最新のLLMアップデート、AIエージェントの動向、スタートアップの資金調達、
-					実践的なAIツール情報をお届けします。
+					実践的なAIツール情報を毎日配信しています。
 				</p>
-				<a href="/ai-pulse/blog/" class="cta">記事一覧を見る</a>
+				<div class="hero-actions">
+					<a href="/ai-pulse/blog/" class="cta-primary">
+						記事を読む
+						<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+							<path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</a>
+					<a href="/ai-pulse/about" class="cta-secondary">このサイトについて</a>
+				</div>
 			</section>
 
 			<section class="latest-section">
-				<p class="section-heading">最新記事</p>
+				<div class="section-header">
+					<p class="section-title">最新の記事</p>
+					<a href="/ai-pulse/blog/" class="view-all">すべて見る →</a>
+				</div>
 				<ul class="post-list">
 					{posts.map((post) => (
 						<li class="post-item">
-							<a href={`/ai-pulse/blog/${post.id}/`}>
+							<a href={`/ai-pulse/blog/${post.id}/`} class="post-link">
 								<span class="post-date"><FormattedDate date={post.data.pubDate} /></span>
 								<span class="post-title">{post.data.title}</span>
 							</a>
 						</li>
 					))}
 				</ul>
-				<a href="/ai-pulse/blog/" class="view-all">すべての記事を見る →</a>
 			</section>
 		</main>
 		<Footer />
