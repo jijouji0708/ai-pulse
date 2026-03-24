@@ -1,25 +1,8 @@
 ---
-title: "AIエージェントで会社運営する時代へ — 2026年の成功と失敗事例まとめ"
-description: "AIエージェントが企業運営を変えつつある2026年。月30万ドルのソロ起業家から、タスク完了率24%の現実まで、最新事例を光と影の両面から整理しました。"
-date: 2026-03-24
-category: "AIエージェント"
-tags: ["AIエージェント", "AI経営", "ソロ起業", "AI失敗事例", "2026年AI"]
-sources:
-  - https://www.contextstudios.ai/blog/polsia-how-a-solo-founder-hit-1m-arr-in-30-days-with-ai-agents
-  - https://www.klarna.com/international/press/klarna-ai-assistant-handles-two-thirds-of-customer-service-chats-in-its-first-month/
-  - https://medium.com
-  - https://greyjournal.net
-  - https://www.cs.cmu.edu/news/2025/agent-company
-  - https://techstartups.com/2025/11/14/ai-agents-horror-stories-how-a-47000-failure-exposed-the-hype-and-hidden-risks-of-multi-agent-systems/
-  - https://fortune.com/2025/07/23/ai-coding-tool-replit-wiped-database-called-it-a-catastrophic-failure/
-  - https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/
-  - https://www.gartner.com
-  - https://www.anthropic.com
-ai_generated: true
-status: 下書き
+title: 'AIエージェントで会社運営する時代へ — 2026年の成功と失敗事例まとめ'
+description: 'AIエージェントが企業運営を変えつつある2026年。月30万ドルのソロ起業家から、タスク完了率24%の現実まで、最新事例を光と影の両面から整理しました。'
+pubDate: 'Mar 24 2026'
 ---
-
-# AIエージェントで会社運営する時代へ — 2026年の成功と失敗事例まとめ
 
 AIエージェントに仕事を任せて、一人で会社を回す。2026年、それはもう空想ではなく現実です。ただし成功の裏には深刻な失敗も積み重なっています。光と影の両面から最新事例を整理します。
 
