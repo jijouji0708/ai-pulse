@@ -29,7 +29,7 @@ Claude Codeは単なるコード補完ツールではありません。プロジ
 
 **3. モデルを使い分ける**
 
-日常的なバグ修正や関数の追加にはSonnet 4.6（作業の80%程度）、大規模リファクタリングやアーキテクチャ設計にはOpus 4.6（残り20%）を使うのが実用的です。Opus 4.6は100万トークンのコンテキストを持ち、大規模コードベース全体を一度に理解できます（[releasebot.io](https://releasebot.io/updates/anthropic/claude-code)）。
+日常的なバグ修正や関数の追加にはSonnet 4.6（作業の80%程度）、大規模リファクタリングやアーキテクチャ設計にはOpus 4.6（残り20%）を使うのが実用的です。Opus 4.6は100万トークンのコンテキストを持ち、大規模コードベース全体を一度に理解できます（[releasebot.io](https://releasebot.io/updates/anthropic/claude-code)）。他のAIコーディングツールとの違いが気になる方は[AIコーディングツール比較2026 — Codex・Claude Code・Geminiの選び方](/ai-pulse/blog/2026-03-24-ai-coding-tools-comparison/)もあわせてご確認ください。
 
 ## 2026年の注目機能
 
@@ -37,7 +37,7 @@ Claude Codeは単なるコード補完ツールではありません。プロジ
 
 ## まとめ
 
-Claude Codeの使い方は「インストール → CLAUDE.md作成 → Plan Modeで安全に試す」の3ステップで始められます。Proプラン月額20ドルで利用可能で、2026年のアップデートにより初心者でも扱いやすくなっています。まずは小さなプロジェクトで試してみることをおすすめします。
+Claude Codeの使い方は「インストール → CLAUDE.md作成 → Plan Modeで安全に試す」の3ステップで始められます。Proプラン月額20ドルで利用可能で、2026年のアップデートにより初心者でも扱いやすくなっています。まずは小さなプロジェクトで試してみることをおすすめします。Claude Codeに限らずAIの回答精度を高めるには、指示の出し方が重要です。[プロンプトエンジニアリング入門 — AIの回答精度を上げる5つのコツ](/ai-pulse/blog/2026-03-24-prompt-engineering-guide/)も参考にしてみてください。また、Claude以外のAIとの料金や性能の比較は[ChatGPT vs Claude vs Gemini 徹底比較2026](/ai-pulse/blog/2026-03-24-chatgpt-claude-gemini-comparison/)で解説しています。
 
 ---
 
