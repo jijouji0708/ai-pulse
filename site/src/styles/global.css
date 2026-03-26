@@ -325,3 +325,174 @@ main {
     padding: var(--space-8) 0;
   }
 }
+
+/* ============================================
+   UI Animations & Micro-interactions
+   ============================================ */
+
+/* --- 1. Hero Gradient Text --- */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #635BFF, #848CD0, #635BFF);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 8s ease infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+  .gradient-text {
+    background: linear-gradient(90deg, #848CD0, #b8bfff, #848CD0);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* --- 4. Dark Mode Transition --- */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- 5. Micro-interactions --- */
+.cta-primary,
+.cta-secondary,
+.card-read-more {
+  transition: all var(--transition-fast);
+}
+
+.cta-primary:active,
+.cta-secondary:active {
+  transform: scale(0.98);
+}
+
+/* Nav link underline animation */
+.nav-link-animated {
+  position: relative;
+}
+
+.nav-link-animated::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background-color: var(--color-text);
+  transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-link-animated:hover::after {
+  width: 100%;
+}
+
+/* --- 7. Footer AI Badge --- */
+@keyframes pulse-green {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+  }
+}
+
+.ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  background: var(--color-bg-sub);
+  border: 1px solid var(--color-border);
+  padding: var(--space-1) var(--space-3);
+  border-radius: 100px;
+  margin-top: var(--space-3);
+}
+
+.ai-badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22C55E;
+  animation: pulse-green 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* --- 8. Scroll-Driven Animations --- */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-reveal {
+  animation: fade-in-up linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 30%;
+}
+
+/* Fallback: if scroll-driven animations not supported, show normally */
+@supports not (animation-timeline: view()) {
+  .scroll-reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --- 6. Cursor Glow (dark mode only, pointer: fine only) --- */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(132, 140, 208, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  display: none;
+}
+
+/* --- prefers-reduced-motion: disable all animations --- */
+@media (prefers-reduced-motion: reduce) {
+  .gradient-text {
+    animation: none;
+  }
+
+  .ai-badge-dot {
+    animation: none;
+  }
+
+  .scroll-reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .cursor-glow {
+    display: none !important;
+  }
+
+  .nav-link-animated::after {
+    transition: none;
+  }
+
+  body {
+    transition: none;
+  }
+}

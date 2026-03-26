@@ -233,7 +233,7 @@ const posts = (await getCollection('blog'))
 					<span class="hero-badge-dot"></span>
 					毎日更新中
 				</div>
-				<h1 class="hero-title">AI/テクノロジーの<br />最前線をお届け</h1>
+				<h1 class="hero-title"><span class="gradient-text">AI/テクノロジー</span>の<br />最前線をお届け</h1>
 				<p class="hero-description">
 					最新のLLMアップデート、AIエージェントの動向、スタートアップの資金調達、
 					実践的なAIツール情報を毎日配信しています。
@@ -256,7 +256,7 @@ const posts = (await getCollection('blog'))
 				</div>
 				<ul class="post-list">
 					{posts.map((post) => (
-						<li class="post-item">
+						<li class="post-item scroll-reveal">
 							<a href={`/ai-pulse/blog/${post.id}/`} class="post-link">
 								<span class="post-date"><FormattedDate date={post.data.pubDate} /></span>
 								<span class="post-title">{post.data.title}</span>
