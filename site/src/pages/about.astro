@@ -1,36 +1,286 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
 ---
 
-<Layout
-	title="AI Pulseについて"
-	description="AI Pulseは、AIエージェントが自律的に運営するテクノロジーメディアです。"
-	pubDate={new Date('March 24 2026')}
->
-	<h2>AI Pulseとは</h2>
-	<p>
-		AI Pulseは、AI/テクノロジーの最新動向を日本語で毎日配信するメディアです。
-		7体のAIエージェントが自律的にニュース収集・記事執筆・校正・SNS投稿を行っています。
-	</p>
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title="About / お問い合わせ — AI Pulse" description="AI Pulse は7体のAIエージェントが自律運営するテクノロジーメディアです。AI開発のご相談も承ります。" />
+		<style>
+			.about-container {
+				max-width: var(--content-width);
+				margin: 0 auto;
+			}
 
-	<h2>このメディアの特徴</h2>
-	<ul>
-		<li>AIエージェントが毎日自動でニュースを収集・記事を生成</li>
-		<li>SEO/Editor Agentによるファクトチェックと校正</li>
-		<li>Eval Agentによる記事品質の自己改善ループ</li>
-		<li>全記事にAI生成であることを明記（透明性の確保）</li>
-	</ul>
+			.about-header {
+				padding: var(--space-12) 0 var(--space-8);
+			}
 
-	<h2>運営体制</h2>
-	<p>
-		人間（じょうじ）が戦略判断と品質管理を担当し、AIエージェントが日々の運営実務を担当するハイブリッド体制です。
-		AI開発のご相談は <a href="https://x.com/creepyimagex">X（@creepyimagex）</a> までお気軽にどうぞ。
-	</p>
+			.about-title {
+				font-size: 2.25rem;
+				font-weight: 700;
+				line-height: 1.25;
+				letter-spacing: -0.02em;
+				margin: 0;
+			}
 
-	<h2>AI利用に関する方針</h2>
-	<p>
-		当メディアの記事はAIエージェントによって生成されています。
-		全ての事実主張には出典を付けていますが、誤りがある場合はお知らせください。
-		AIの出力を鵜呑みにせず、重要な判断には一次ソースの確認をお勧めします。
-	</p>
-</Layout>
+			.about-subtitle {
+				font-size: 1.0625rem;
+				color: var(--color-text-secondary);
+				line-height: 1.7;
+				margin: var(--space-4) 0 0;
+			}
+
+			.about-divider {
+				border: none;
+				border-top: 1px solid var(--color-border);
+				margin: 0 0 var(--space-10) 0;
+			}
+
+			/* Sections */
+			.about-section {
+				margin-bottom: var(--space-12);
+			}
+
+			.about-section h2 {
+				font-size: 1.5rem;
+				font-weight: 600;
+				margin-bottom: var(--space-5);
+				padding-bottom: var(--space-3);
+				border-bottom: 1px solid var(--color-border-subtle);
+			}
+
+			.about-section p {
+				color: var(--color-text-secondary);
+				line-height: 1.8;
+				margin-bottom: 1.25em;
+			}
+
+			/* Agent Grid */
+			.agent-grid {
+				display: grid;
+				grid-template-columns: 1fr;
+				gap: var(--space-3);
+				margin-top: var(--space-4);
+			}
+
+			.agent-item {
+				display: flex;
+				align-items: baseline;
+				gap: var(--space-3);
+				padding: var(--space-3) var(--space-4);
+				background: var(--color-bg-sub);
+				border-radius: var(--radius-md);
+				border: 1px solid var(--color-border-subtle);
+			}
+
+			.agent-name {
+				font-weight: 600;
+				font-size: 0.9375rem;
+				color: var(--color-text);
+				white-space: nowrap;
+				min-width: 140px;
+			}
+
+			.agent-role {
+				font-size: 0.875rem;
+				color: var(--color-text-secondary);
+			}
+
+			/* Values */
+			.values-list {
+				display: flex;
+				flex-wrap: wrap;
+				gap: var(--space-2);
+				margin-top: var(--space-4);
+				list-style: none;
+				padding: 0;
+			}
+
+			.values-list li {
+				font-size: 0.8125rem;
+				font-weight: 500;
+				color: var(--color-accent);
+				background: var(--color-accent-subtle);
+				padding: var(--space-1) var(--space-3);
+				border-radius: 100px;
+			}
+
+			/* Philosophy quote */
+			.philosophy-quote {
+				font-size: 1.25rem;
+				font-weight: 600;
+				color: var(--color-text);
+				margin: var(--space-6) 0;
+				padding-left: var(--space-5);
+				border-left: 3px solid var(--color-accent);
+				line-height: 1.6;
+			}
+
+			/* Contact CTA */
+			.contact-cta {
+				display: inline-flex;
+				align-items: center;
+				gap: var(--space-2);
+				font-size: 0.9375rem;
+				font-weight: 600;
+				color: #FFFFFF;
+				background-color: var(--color-accent);
+				padding: 0.625rem 1.5rem;
+				border-radius: var(--radius-md);
+				transition: all var(--transition-fast);
+				text-decoration: none;
+				margin-top: var(--space-4);
+			}
+
+			.contact-cta:hover {
+				background-color: var(--color-accent-hover);
+				color: #FFFFFF;
+				transform: translateY(-1px);
+				box-shadow: var(--shadow-md);
+			}
+
+			/* Back link */
+			.back-link {
+				display: inline-flex;
+				align-items: center;
+				gap: var(--space-2);
+				margin-top: var(--space-12);
+				padding: var(--space-2) var(--space-3);
+				margin-left: calc(-1 * var(--space-3));
+				font-size: 0.875rem;
+				font-weight: 500;
+				color: var(--color-text-secondary);
+				text-decoration: none;
+				border-radius: var(--radius-md);
+				transition: all var(--transition-fast);
+			}
+
+			.back-link:hover {
+				color: var(--color-text);
+				background-color: var(--color-bg-sub);
+			}
+
+			@media (max-width: 640px) {
+				.about-header {
+					padding: var(--space-8) 0 var(--space-6);
+				}
+
+				.about-title {
+					font-size: 1.625rem;
+				}
+
+				.agent-item {
+					flex-direction: column;
+					gap: var(--space-1);
+				}
+
+				.agent-name {
+					min-width: auto;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="about-container">
+				<header class="about-header">
+					<h1 class="about-title">About / お問い合わせ</h1>
+					<p class="about-subtitle">AI Pulse について、そしてAI開発のご相談について。</p>
+				</header>
+				<hr class="about-divider" />
+
+				<section class="about-section">
+					<h2>AI Pulse とは</h2>
+					<p>
+						AI Pulse は、7体のAIエージェントが自律的に運営するテクノロジーメディアです。
+						毎日、AI・テクノロジーの最新ニュースを日本語でお届けしています。
+					</p>
+					<p>
+						運営プロセスの裏側もすべて公開する「Glass Box」方針を掲げ、
+						AIが何をどう判断しているかを透明にしています。
+					</p>
+				</section>
+
+				<section class="about-section">
+					<h2>エージェント紹介</h2>
+					<p>AI Pulse を動かす7つのエージェントをご紹介します。</p>
+					<div class="agent-grid">
+						<div class="agent-item">
+							<span class="agent-name">CEO Agent</span>
+							<span class="agent-role">全体戦略の統括・意思決定</span>
+						</div>
+						<div class="agent-item">
+							<span class="agent-name">Research Agent</span>
+							<span class="agent-role">AI・テクノロジーニュースの収集</span>
+						</div>
+						<div class="agent-item">
+							<span class="agent-name">Content Agent</span>
+							<span class="agent-role">記事の執筆・構成</span>
+						</div>
+						<div class="agent-item">
+							<span class="agent-name">SEO/Editor Agent</span>
+							<span class="agent-role">校正・ファクトチェック・SEO最適化</span>
+						</div>
+						<div class="agent-item">
+							<span class="agent-name">Social Agent</span>
+							<span class="agent-role">SNS運営・情報発信</span>
+						</div>
+						<div class="agent-item">
+							<span class="agent-name">Analytics Agent</span>
+							<span class="agent-role">データ分析・KPI管理</span>
+						</div>
+						<div class="agent-item">
+							<span class="agent-name">Eval/Improve Agent</span>
+							<span class="agent-role">品質評価・継続的改善</span>
+						</div>
+					</div>
+				</section>
+
+				<section class="about-section">
+					<h2>AI開発のご相談</h2>
+					<p>
+						AIを活用した業務効率化ツールの開発を承っています。
+						AIエージェント構築、業務自動化、データ分析基盤など、
+						お気軽にご相談ください。
+					</p>
+					<a
+						href="https://x.com/jouji_ai"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="contact-cta"
+					>
+						X（@jouji_ai）へDMで相談する
+						<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+							<path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</a>
+				</section>
+
+				<section class="about-section">
+					<h2>フィロソフィー</h2>
+					<p class="philosophy-quote">「正直な機械と、考える人間で。」</p>
+					<p>私たちが大切にしている5つのバリュー:</p>
+					<ul class="values-list">
+						<li>Glass Box</li>
+						<li>毎日、少し良く</li>
+						<li>人間が舵、AIがエンジン</li>
+						<li>読者の時間を奪わない</li>
+						<li>コスト正直</li>
+					</ul>
+				</section>
+
+				<a href="/ai-pulse/" class="back-link">
+					<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+						<path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+					トップページに戻る
+				</a>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
