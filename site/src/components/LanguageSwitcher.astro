@@ -1,0 +1,476 @@
+---
+/**
+ * LanguageSwitcher.astro
+ * 言語切り替えUIコンポーネント
+ *
+ * Props:
+ *   currentLang: "ja" | "en" | "es" (default: "ja")
+ *   availableTranslations: string[] — 翻訳版が存在する言語コードの配列
+ *     例: ["en", "es"] → 英語とスペイン語の翻訳あり
+ *   slug: string — 現在の記事スラグ（記事ページの場合）
+ *   isArticle: boolean — 記事ページかどうか (default: false)
+ */
+interface Props {
+  currentLang?: "ja" | "en" | "es";
+  availableTranslations?: string[];
+  slug?: string;
+  isArticle?: boolean;
+}
+
+const {
+  currentLang = "ja",
+  availableTranslations = [],
+  slug = "",
+  isArticle = false,
+} = Astro.props;
+
+const languages = [
+  { code: "ja", label: "日本語", flag: "JA" },
+  { code: "en", label: "English", flag: "EN" },
+  { code: "es", label: "Español", flag: "ES" },
+] as const;
+
+const currentLabel = languages.find((l) => l.code === currentLang)!;
+
+/**
+ * 各言語のリンク先を決定する
+ * - 翻訳版がある場合 → その記事ページ
+ * - 翻訳版がない場合 → その言語のトップページ
+ */
+function getLangHref(langCode: string): string {
+  const base = "/ai-pulse";
+  if (langCode === currentLang) return "#";
+  if (isArticle && slug) {
+    const hasTranslation = availableTranslations.includes(langCode);
+    if (hasTranslation) {
+      return langCode === "ja"
+        ? `${base}/blog/${slug}`
+        : `${base}/${langCode}/blog/${slug}`;
+    }
+    // 翻訳版がない → その言語のトップページへ
+    return langCode === "ja" ? `${base}/` : `${base}/${langCode}/`;
+  }
+  // 非記事ページ
+  return langCode === "ja" ? `${base}/` : `${base}/${langCode}/`;
+}
+
+function isAvailable(langCode: string): boolean {
+  if (langCode === currentLang) return true;
+  if (!isArticle) return true;
+  return availableTranslations.includes(langCode);
+}
+---
+
+<!-- ===== ドロップダウン型 言語スイッチャー ===== -->
+<div class="lang-switcher" data-lang-switcher>
+  <button
+    class="lang-trigger"
+    aria-label="言語を切り替え"
+    aria-expanded="false"
+    aria-haspopup="listbox"
+    type="button"
+  >
+    <svg class="lang-globe" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M2 12h20" />
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+    </svg>
+    <span class="lang-code">{currentLabel.flag}</span>
+    <svg class="lang-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="6 9 12 15 18 9" />
+    </svg>
+  </button>
+
+  <ul class="lang-dropdown" role="listbox" aria-label="言語を選択">
+    {languages.map((lang) => {
+      const available = isAvailable(lang.code);
+      const isCurrent = lang.code === currentLang;
+      return (
+        <li role="option" aria-selected={isCurrent ? "true" : "false"}>
+          <a
+            href={getLangHref(lang.code)}
+            class:list={[
+              "lang-option",
+              { "is-current": isCurrent },
+              { "is-unavailable": !available },
+            ]}
+            aria-current={isCurrent ? "true" : undefined}
+            data-lang={lang.code}
+          >
+            <span class="lang-option-label">{lang.label}</span>
+            {isCurrent && (
+              <svg class="lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            )}
+            {!available && (
+              <span class="lang-coming-soon">Coming soon</span>
+            )}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</div>
+
+<!-- ===== 記事ページ用インラインリンク ===== -->
+{isArticle && availableTranslations.length > 0 && (
+  <aside class="article-lang-bar" aria-label="この記事の翻訳">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="10" />
+      <path d="M2 12h20" />
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+    </svg>
+    <span class="article-lang-text">
+      Also available in:{" "}
+      {availableTranslations.map((code, i) => {
+        const lang = languages.find((l) => l.code === code);
+        if (!lang) return null;
+        const href = getLangHref(code);
+        return (
+          <>
+            {i > 0 && <span class="article-lang-sep"> | </span>}
+            <a href={href} class="article-lang-link">{lang.label}</a>
+          </>
+        );
+      })}
+    </span>
+  </aside>
+)}
+
+<script>
+  // ドロップダウンの開閉制御
+  document.addEventListener("astro:page-load", initLangSwitcher);
+  document.addEventListener("DOMContentLoaded", initLangSwitcher);
+
+  function initLangSwitcher() {
+    const switchers = document.querySelectorAll("[data-lang-switcher]");
+    switchers.forEach((switcher) => {
+      // 既にイベントが設定済みなら二重登録しない
+      if ((switcher as any).__langInit) return;
+      (switcher as any).__langInit = true;
+
+      const trigger = switcher.querySelector<HTMLButtonElement>(".lang-trigger")!;
+      const dropdown = switcher.querySelector<HTMLUListElement>(".lang-dropdown")!;
+
+      function open() {
+        trigger.setAttribute("aria-expanded", "true");
+        dropdown.classList.add("is-open");
+        // 最初の選択肢にフォーカス
+        const firstOption = dropdown.querySelector<HTMLAnchorElement>(".lang-option");
+        firstOption?.focus();
+      }
+
+      function close() {
+        trigger.setAttribute("aria-expanded", "false");
+        dropdown.classList.remove("is-open");
+      }
+
+      function toggle() {
+        const isOpen = trigger.getAttribute("aria-expanded") === "true";
+        isOpen ? close() : open();
+      }
+
+      // クリック開閉
+      trigger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggle();
+      });
+
+      // ホバーで開く（デスクトップ向け）
+      let hoverTimeout: ReturnType<typeof setTimeout>;
+      switcher.addEventListener("mouseenter", () => {
+        clearTimeout(hoverTimeout);
+        open();
+      });
+      switcher.addEventListener("mouseleave", () => {
+        hoverTimeout = setTimeout(close, 200);
+      });
+
+      // キーボード操作
+      trigger.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+          e.preventDefault();
+          open();
+        }
+      });
+
+      dropdown.addEventListener("keydown", (e) => {
+        const options = Array.from(
+          dropdown.querySelectorAll<HTMLAnchorElement>(".lang-option")
+        );
+        const current = document.activeElement as HTMLAnchorElement;
+        const idx = options.indexOf(current);
+
+        switch (e.key) {
+          case "Escape":
+            e.preventDefault();
+            close();
+            trigger.focus();
+            break;
+          case "ArrowDown":
+            e.preventDefault();
+            options[(idx + 1) % options.length]?.focus();
+            break;
+          case "ArrowUp":
+            e.preventDefault();
+            options[(idx - 1 + options.length) % options.length]?.focus();
+            break;
+          case "Tab":
+            close();
+            break;
+        }
+      });
+
+      // 外側クリックで閉じる
+      document.addEventListener("click", (e) => {
+        if (!switcher.contains(e.target as Node)) {
+          close();
+        }
+      });
+    });
+  }
+</script>
+
+<style>
+  /* ===== 言語スイッチャー — コンテナ ===== */
+  .lang-switcher {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  /* ===== トリガーボタン ===== */
+  .lang-trigger {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: var(--space-1) var(--space-2);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    color: var(--color-text-secondary);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+      color var(--transition-fast),
+      background-color var(--transition-fast),
+      border-color var(--transition-fast);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .lang-trigger:hover,
+  .lang-trigger[aria-expanded="true"] {
+    color: var(--color-text);
+    background-color: var(--color-accent-subtle);
+    border-color: var(--color-border);
+  }
+
+  .lang-globe {
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  .lang-trigger:hover .lang-globe,
+  .lang-trigger[aria-expanded="true"] .lang-globe {
+    opacity: 1;
+  }
+
+  .lang-code {
+    letter-spacing: 0.03em;
+  }
+
+  .lang-chevron {
+    flex-shrink: 0;
+    transition: transform var(--transition-fast);
+    opacity: 0.5;
+  }
+
+  .lang-trigger[aria-expanded="true"] .lang-chevron {
+    transform: rotate(180deg);
+    opacity: 0.8;
+  }
+
+  /* ===== ドロップダウン ===== */
+  .lang-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 170px;
+    margin: 0;
+    padding: var(--space-1);
+    list-style: none;
+    background-color: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition:
+      opacity 150ms ease,
+      transform 150ms ease,
+      visibility 150ms;
+    z-index: 200;
+  }
+
+  .lang-dropdown.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* ===== 各言語オプション ===== */
+  .lang-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 450;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      color var(--transition-fast),
+      background-color var(--transition-fast);
+    outline: none;
+  }
+
+  .lang-option:hover,
+  .lang-option:focus-visible {
+    color: var(--color-text);
+    background-color: var(--color-bg-sub);
+  }
+
+  .lang-option:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-accent);
+  }
+
+  .lang-option.is-current {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .lang-option.is-current:hover {
+    background-color: var(--color-accent-subtle);
+  }
+
+  .lang-check {
+    flex-shrink: 0;
+    color: var(--color-accent);
+  }
+
+  /* グレーアウト（翻訳版なし） */
+  .lang-option.is-unavailable {
+    color: var(--color-text-tertiary);
+  }
+
+  .lang-option.is-unavailable:hover {
+    color: var(--color-text-tertiary);
+    background-color: var(--color-bg-sub);
+  }
+
+  .lang-coming-soon {
+    font-size: 0.6875rem;
+    font-weight: 400;
+    color: var(--color-text-tertiary);
+    background: var(--color-bg-sub);
+    border: 1px solid var(--color-border-subtle);
+    padding: 1px 6px;
+    border-radius: 100px;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+
+  /* ===== 記事ページ用インラインリンク ===== */
+  .article-lang-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    background: var(--color-bg-sub);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+  }
+
+  .article-lang-bar svg {
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+
+  .article-lang-text {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+
+  .article-lang-link {
+    color: var(--color-accent);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--color-accent);
+  }
+
+  .article-lang-link:hover {
+    color: var(--color-accent-hover);
+    text-decoration-color: var(--color-accent-hover);
+  }
+
+  .article-lang-sep {
+    color: var(--color-text-tertiary);
+    margin: 0 1px;
+  }
+
+  /* ===== prefers-reduced-motion ===== */
+  @media (prefers-reduced-motion: reduce) {
+    .lang-dropdown {
+      transition: none;
+    }
+
+    .lang-chevron {
+      transition: none;
+    }
+
+    .lang-trigger {
+      transition: none;
+    }
+
+    .lang-option {
+      transition: none;
+    }
+  }
+
+  /* ===== レスポンシブ ===== */
+  @media (max-width: 640px) {
+    .lang-trigger {
+      padding: var(--space-1) 6px;
+      gap: 4px;
+    }
+
+    .lang-code {
+      font-size: 0.75rem;
+    }
+
+    .lang-chevron {
+      width: 10px;
+      height: 10px;
+    }
+
+    .lang-dropdown {
+      min-width: 150px;
+    }
+  }
+</style>

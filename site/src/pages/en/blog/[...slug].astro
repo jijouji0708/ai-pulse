@@ -1,0 +1,146 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import BaseHead from '../../../components/BaseHead.astro';
+import Footer from '../../../components/Footer.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
+import Header from '../../../components/Header.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog-en');
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: post,
+	}));
+}
+type Props = CollectionEntry<'blog-en'>;
+
+const post = Astro.props;
+const { Content } = await render(post);
+const { title, description, pubDate, updatedDate } = post.data;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			.article-container {
+				max-width: var(--content-width);
+				margin: 0 auto;
+			}
+
+			.article-header {
+				padding: var(--space-12) 0 var(--space-8);
+			}
+
+			.article-meta {
+				display: flex;
+				align-items: center;
+				gap: var(--space-3);
+				margin-bottom: var(--space-5);
+			}
+
+			.article-date {
+				font-size: 0.8125rem;
+				color: var(--color-text-secondary);
+				font-variant-numeric: tabular-nums;
+			}
+
+			.article-updated {
+				font-size: 0.75rem;
+				color: var(--color-text-tertiary);
+				padding-left: var(--space-3);
+				border-left: 1px solid var(--color-border);
+			}
+
+			.article-title {
+				font-size: 2.25rem;
+				font-weight: 700;
+				line-height: 1.25;
+				letter-spacing: -0.02em;
+				margin: 0;
+			}
+
+			.article-description {
+				font-size: 1.0625rem;
+				color: var(--color-text-secondary);
+				line-height: 1.7;
+				margin: var(--space-4) 0 0;
+			}
+
+			.article-divider {
+				border: none;
+				border-top: 1px solid var(--color-border);
+				margin: 0 0 var(--space-10) 0;
+			}
+
+			.back-link {
+				display: inline-flex;
+				align-items: center;
+				gap: var(--space-2);
+				margin-top: var(--space-12);
+				padding: var(--space-2) var(--space-3);
+				margin-left: calc(-1 * var(--space-3));
+				font-size: 0.875rem;
+				font-weight: 500;
+				color: var(--color-text-secondary);
+				text-decoration: none;
+				border-radius: var(--radius-md);
+				transition: all var(--transition-fast);
+			}
+
+			.back-link:hover {
+				color: var(--color-text);
+				background-color: var(--color-bg-sub);
+			}
+
+			@media (max-width: 640px) {
+				.article-header {
+					padding: var(--space-8) 0 var(--space-6);
+				}
+
+				.article-title {
+					font-size: 1.625rem;
+				}
+
+				.article-description {
+					font-size: 1rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<article class="article-container">
+				<header class="article-header">
+					<div class="article-meta">
+						<span class="article-date">
+							<FormattedDate date={pubDate} />
+						</span>
+						{updatedDate && (
+							<span class="article-updated">
+								Updated: <FormattedDate date={updatedDate} />
+							</span>
+						)}
+					</div>
+					<h1 class="article-title">{title}</h1>
+					{description && (
+						<p class="article-description">{description}</p>
+					)}
+				</header>
+				<hr class="article-divider" />
+				<div class="prose">
+					<Content />
+				</div>
+				<a href="/ai-pulse/en/blog/" class="back-link">
+					<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+						<path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+					Back to Blog
+				</a>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>
