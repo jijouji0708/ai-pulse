@@ -1,11 +1,20 @@
 ---
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 const { currentLang = "ja" } = Astro.props;
+
+const navLabels = {
+	ja: { home: "ホーム", blog: "ブログ", about: "About" },
+	en: { home: "Home", blog: "Blog", about: "About" },
+	es: { home: "Inicio", blog: "Blog", about: "Acerca de" },
+} as const;
+
+const labels = navLabels[currentLang] || navLabels.ja;
+const prefix = currentLang === "ja" ? "/ai-pulse" : `/ai-pulse/${currentLang}`;
 ---
 
 <header>
 	<nav>
-		<a href="/ai-pulse/" class="logo">
+		<a href={`${prefix}/`} class="logo">
 			<span class="logo-icon" aria-hidden="true">
 				<svg width="20" height="20" viewBox="0 0 20 20" fill="none">
 					<rect width="20" height="20" rx="5" fill="var(--color-accent)" />
@@ -15,9 +24,9 @@ const { currentLang = "ja" } = Astro.props;
 			AI Pulse
 		</a>
 		<div class="nav-links">
-			<a href="/ai-pulse/" class="nav-link-animated">ホーム</a>
-			<a href="/ai-pulse/blog" class="nav-link-animated">ブログ</a>
-			<a href="/ai-pulse/about" class="nav-link-animated">About</a>
+			<a href={`${prefix}/`} class="nav-link-animated">{labels.home}</a>
+			<a href={`${prefix}/blog`} class="nav-link-animated">{labels.blog}</a>
+			<a href="/ai-pulse/about" class="nav-link-animated">{labels.about}</a>
 			<a href="https://x.com/creepyimagex" target="_blank" rel="noopener noreferrer" class="icon-link" aria-label="X (Twitter)">
 				<svg viewBox="0 0 24 24" aria-hidden="true" width="16" height="16" fill="currentColor">
 					<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />

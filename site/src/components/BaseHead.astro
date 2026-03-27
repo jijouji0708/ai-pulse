@@ -68,8 +68,9 @@ const { title, description, image = FallbackImage } = Astro.props;
 
 <!-- Cursor Glow (dark mode + pointer:fine only) -->
 <script is:inline>
-(function(){
+function initCursorGlow(){
   if(!matchMedia('(pointer:fine)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  if(document.querySelector('.cursor-glow'))return;
   var g=document.createElement('div');g.className='cursor-glow';document.body.appendChild(g);
   var x=0,y=0,gx=0,gy=0,af=0;
   function isDark(){return matchMedia('(prefers-color-scheme:dark)').matches}
@@ -79,7 +80,9 @@ const { title, description, image = FallbackImage } = Astro.props;
   function loop(){gx+=(x-gx)*0.15;gy+=(y-gy)*0.15;g.style.transform='translate('+gx+'px,'+gy+'px) translate(-50%,-50%)';af=requestAnimationFrame(loop)}
   loop();
   document.addEventListener('astro:before-swap',function(){cancelAnimationFrame(af);if(g.parentNode)g.parentNode.removeChild(g)});
-})();
+}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initCursorGlow)}else{initCursorGlow()}
+document.addEventListener('astro:page-load',initCursorGlow);
 </script>
 
 <!-- Google Analytics -->
