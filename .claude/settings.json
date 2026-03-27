@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(cd /Users/takamuranaoya/Desktop/Agent/ai-company && git:*)",
+      "Bash(npm run build:*)",
+      "Bash(cd /Users/takamuranaoya/Desktop/Agent/ai-company/site && npm run build:*)"
+    ]
+  }
+}
