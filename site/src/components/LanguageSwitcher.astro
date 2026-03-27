@@ -155,7 +155,9 @@ function isAvailable(langCode: string): boolean {
 
       function open() {
         trigger.setAttribute("aria-expanded", "true");
-        dropdown.classList.add("is-open");
+        dropdown.style.opacity = "1";
+        dropdown.style.visibility = "visible";
+        dropdown.style.transform = "translateY(0)";
         // 最初の選択肢にフォーカス
         const firstOption = dropdown.querySelector<HTMLAnchorElement>(".lang-option");
         firstOption?.focus();
@@ -163,7 +165,9 @@ function isAvailable(langCode: string): boolean {
 
       function close() {
         trigger.setAttribute("aria-expanded", "false");
-        dropdown.classList.remove("is-open");
+        dropdown.style.opacity = "0";
+        dropdown.style.visibility = "hidden";
+        dropdown.style.transform = "translateY(-4px)";
       }
 
       function toggle() {
