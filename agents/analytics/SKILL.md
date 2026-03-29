@@ -13,6 +13,24 @@
 4. エージェント実行ログを確認する
 5. KPI（`shared/kpi.md`）と比較して進捗率を算出する
 6. 改善提案を3つ作成する
+7. **Google Analytics データ取得**（認証情報が設定済みの場合）:
+   ```bash
+   node scripts/fetch-analytics.js --days 7 --output agents/analytics/reports/ga-weekly.md
+   ```
+8. **Search Console データ取得**（認証情報が設定済みの場合）:
+   ```bash
+   node scripts/fetch-search-console.js --days 7 --output agents/analytics/reports/gsc-weekly.md
+   ```
+
+## 外部データ取得スクリプト
+
+| スクリプト | API | データ |
+|-----------|-----|--------|
+| `scripts/fetch-analytics.js` | GA4 Data API | PV, ユーザー数, セッション, トップページ, トラフィックソース, デバイス, 国別 |
+| `scripts/fetch-search-console.js` | Search Console API | クリック数, 表示回数, CTR, 掲載順位, 検索クエリ |
+
+セットアップ手順: `scripts/ANALYTICS_SETUP.md` を参照。
+認証情報の設定はプロジェクトオーナー（人間）が実施する必要がある。
 
 ## レポートフォーマット
 ```markdown
@@ -54,5 +72,6 @@
 ## 制約
 - **最大実行時間**: 15分
 - 初期段階はファイル数やGit履歴からデータ収集する
-- 外部アナリティクス（GA等）が未接続の場合、ファイルベースの指標のみ使用
+- GA4 / Search Console API が未接続の場合、ファイルベースの指標のみ使用
+- API接続済みの場合は `fetch-analytics.js` / `fetch-search-console.js` で実データを取得
 - 数値は正確に。推定値には `[推定]` を付ける

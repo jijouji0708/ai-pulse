@@ -2,6 +2,12 @@
 ---
 
 <footer>
+	<div class="footer-note-banner">
+		<a href="https://note.com/right_phlox9349" target="_blank" rel="noopener noreferrer">
+			<span class="note-banner-text">運営者のエッセイを <strong>note</strong> で公開中</span>
+			<span class="note-banner-arrow">→</span>
+		</a>
+	</div>
 	<div class="footer-inner">
 		<div class="footer-left">
 			<p class="copyright">&copy; 2026 AI Pulse</p>
@@ -15,6 +21,7 @@
 			<a href="/ai-pulse/">ホーム</a>
 			<a href="/ai-pulse/blog">ブログ</a>
 			<a href="/ai-pulse/about">About</a>
+			<a href="https://note.com/right_phlox9349" target="_blank" rel="noopener noreferrer">note</a>
 			<a href="https://x.com/creepyimagex" target="_blank" rel="noopener noreferrer" class="icon-link" aria-label="X (Twitter)">
 				<svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14" fill="currentColor">
 					<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -25,6 +32,49 @@
 </footer>
 
 <style>
+	.footer-note-banner {
+		max-width: var(--wide-width);
+		margin: 0 auto var(--space-6);
+	}
+
+	.footer-note-banner a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: var(--space-2);
+		padding: var(--space-2) var(--space-4);
+		background: var(--color-bg-sub);
+		border: 1px solid var(--color-border-subtle);
+		border-radius: var(--radius-md);
+		text-decoration: none;
+		transition: all var(--transition-fast);
+	}
+
+	.footer-note-banner a:hover {
+		border-color: var(--color-accent);
+		background: var(--color-accent-subtle);
+	}
+
+	.note-banner-text {
+		font-size: 0.8125rem;
+		color: var(--color-text-secondary);
+	}
+
+	.note-banner-text strong {
+		color: var(--color-text);
+	}
+
+	.note-banner-arrow {
+		font-size: 0.8125rem;
+		color: var(--color-text-tertiary);
+		transition: transform var(--transition-fast);
+	}
+
+	.footer-note-banner a:hover .note-banner-arrow {
+		transform: translateX(2px);
+		color: var(--color-accent);
+	}
+
 	footer {
 		border-top: 1px solid var(--color-border);
 		padding: var(--space-10) var(--space-6);

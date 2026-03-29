@@ -1,0 +1,185 @@
+---
+---
+
+<section class="newsletter">
+	<div class="newsletter-inner">
+		<div class="newsletter-icon" aria-hidden="true">
+			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+				<rect x="2" y="4" width="20" height="16" rx="2" />
+				<path d="M22 4L12 13L2 4" />
+			</svg>
+		</div>
+		<h3 class="newsletter-title">ニュースレターに登録する</h3>
+		<p class="newsletter-description">AI Pulseの最新記事をメールでお届けします</p>
+		<form
+			action="https://buttondown.com/api/emails/embed-subscribe/aipulse"
+			method="post"
+			target="popupwindow"
+			class="newsletter-form"
+		>
+			<div class="newsletter-input-group">
+				<input
+					type="email"
+					name="email"
+					placeholder="メールアドレス"
+					required
+					aria-label="メールアドレス"
+					class="newsletter-input"
+				/>
+				<button type="submit" class="newsletter-button">
+					登録
+					<svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+						<path d="M3 8H13M10 5L13 8L10 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+				</button>
+			</div>
+			<p class="newsletter-note">無料で配信。いつでも解除できます。</p>
+		</form>
+	</div>
+</section>
+
+<style>
+	.newsletter {
+		max-width: var(--content-width);
+		margin: var(--space-16) auto var(--space-8);
+	}
+
+	.newsletter-inner {
+		text-align: center;
+		padding: var(--space-10) var(--space-8);
+		border-radius: var(--radius-xl);
+		border: 1px solid var(--color-border);
+		background: var(--color-bg-sub);
+		position: relative;
+		overflow: hidden;
+	}
+
+	/* Glass morphism overlay for dark mode */
+	@media (prefers-color-scheme: dark) {
+		.newsletter-inner {
+			background: rgba(26, 26, 26, 0.6);
+			backdrop-filter: blur(16px);
+			-webkit-backdrop-filter: blur(16px);
+			border-color: rgba(255, 255, 255, 0.06);
+			box-shadow:
+				0 0 0 1px rgba(255, 255, 255, 0.03) inset,
+				0 4px 24px rgba(0, 0, 0, 0.3);
+		}
+	}
+
+	.newsletter-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 48px;
+		height: 48px;
+		border-radius: var(--radius-lg);
+		background: var(--color-accent-subtle);
+		color: var(--color-accent);
+		margin-bottom: var(--space-5);
+	}
+
+	.newsletter-title {
+		font-size: 1.25rem;
+		font-weight: 700;
+		margin: 0 0 var(--space-2);
+		letter-spacing: -0.01em;
+	}
+
+	.newsletter-description {
+		font-size: 0.9375rem;
+		color: var(--color-text-secondary);
+		margin: 0 0 var(--space-6);
+		line-height: 1.6;
+	}
+
+	.newsletter-form {
+		max-width: 400px;
+		margin: 0 auto;
+	}
+
+	.newsletter-input-group {
+		display: flex;
+		gap: var(--space-2);
+	}
+
+	.newsletter-input {
+		flex: 1;
+		padding: 0.625rem 1rem;
+		font-size: 0.9375rem;
+		font-family: var(--font-sans);
+		color: var(--color-text);
+		background: var(--color-bg);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-md);
+		outline: none;
+		transition: border-color var(--transition-fast);
+	}
+
+	.newsletter-input::placeholder {
+		color: var(--color-text-tertiary);
+	}
+
+	.newsletter-input:focus {
+		border-color: var(--color-accent);
+		box-shadow: 0 0 0 3px var(--color-accent-subtle);
+	}
+
+	@media (prefers-color-scheme: dark) {
+		.newsletter-input {
+			background: rgba(10, 10, 10, 0.6);
+			border-color: rgba(255, 255, 255, 0.1);
+		}
+
+		.newsletter-input:focus {
+			border-color: var(--color-accent);
+		}
+	}
+
+	.newsletter-button {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2);
+		padding: 0.625rem 1.25rem;
+		font-size: 0.9375rem;
+		font-weight: 600;
+		font-family: var(--font-sans);
+		color: #FFFFFF;
+		background: var(--color-accent);
+		border: none;
+		border-radius: var(--radius-md);
+		cursor: pointer;
+		transition: all var(--transition-fast);
+		white-space: nowrap;
+	}
+
+	.newsletter-button:hover {
+		background: var(--color-accent-hover);
+		transform: translateY(-1px);
+		box-shadow: var(--shadow-md);
+	}
+
+	.newsletter-button:active {
+		transform: translateY(0);
+	}
+
+	.newsletter-note {
+		font-size: 0.75rem;
+		color: var(--color-text-tertiary);
+		margin: var(--space-3) 0 0;
+	}
+
+	@media (max-width: 640px) {
+		.newsletter-inner {
+			padding: var(--space-8) var(--space-5);
+		}
+
+		.newsletter-input-group {
+			flex-direction: column;
+		}
+
+		.newsletter-button {
+			justify-content: center;
+		}
+	}
+</style>

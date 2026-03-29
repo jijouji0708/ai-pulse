@@ -4,9 +4,12 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import Newsletter from '../components/Newsletter.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
+const now = new Date();
 const posts = (await getCollection('blog'))
+	.filter((post) => post.data.pubDate.valueOf() <= now.valueOf())
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 5);
 ---
@@ -265,6 +268,8 @@ const posts = (await getCollection('blog'))
 					))}
 				</ul>
 			</section>
+
+			<Newsletter />
 		</main>
 		<Footer />
 	</body>
