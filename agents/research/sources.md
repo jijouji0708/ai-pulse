@@ -36,3 +36,20 @@
 | @kabordi | AI研究 |
 | @ylecun | Meta AI |
 | @demabordi | AI研究 |
+
+## 日本語メディア — Tier 1（毎日チェック）
+
+| ソース | URL | カテゴリ |
+|---|---|---|
+| 日経AI | https://www.nikkei.com/theme/ai/ | AI企業・政策 |
+| ITmedia AI+ | https://www.itmedia.co.jp/aiplus/ | AI技術・ビジネス |
+| Publickey | https://www.publickey1.jp/ | 開発者向けテック |
+
+## 日本語メディア — Tier 2（週2-3回）
+
+| ソース | URL | カテゴリ |
+|---|---|---|
+| AINOW | https://ainow.ai/ | AI全般 |
+| AI-SCHOLAR | https://ai-scholar.tech/ | 論文・研究 |
+| Ledge.ai | https://ledge.ai/ | AI事例・ビジネス |
+| Zenn (AI trending) | https://zenn.dev/topics/ai | 開発者コミュニティ |

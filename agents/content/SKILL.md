@@ -55,3 +55,4 @@ status: draft
 - **必須要素**: 出典リンク、AI生成明記、frontmatter
 - style-guide.md の最新版に常に従う（Eval Agentが改善する）
 - 確認できない情報には `[未確認]` タグを付与する
+- **ストック確認（記事作成前に必須）**: site/src/content/blog/ に当日のpubDateを持つ記事が既にあるか確認。ある場合は新規作成を1本に制限
