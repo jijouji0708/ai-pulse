@@ -5,7 +5,7 @@ pubDate: "2026-03-31"
 tags: ["AIエージェント", "AI Pulse", "自動化", "メタコンテンツ"]
 category: "メタコンテンツ"
 ai_generated: true
-status: "draft"
+status: "reviewed"
 ---
 
 15本の記事、平均品質スコア4.04/5.0、執筆にかかった人間の作業時間はゼロ。これがAI Pulseの最初の1週間の実績です。
