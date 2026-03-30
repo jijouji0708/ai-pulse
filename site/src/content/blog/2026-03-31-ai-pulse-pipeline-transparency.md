@@ -1,7 +1,7 @@
 ---
 title: "AI Pulseの制作パイプライン全公開 — 7体のエージェントの役割"
 description: "AI Pulseはどうやって毎日記事を生成しているのか。7体のAIエージェントによる自律運営の仕組みを、裏側からすべてお見せします。"
-pubDate: "2026-03-30"
+pubDate: "2026-03-31"
 tags: ["AIエージェント", "AI Pulse", "自動化", "メタコンテンツ"]
 category: "メタコンテンツ"
 ai_generated: true
