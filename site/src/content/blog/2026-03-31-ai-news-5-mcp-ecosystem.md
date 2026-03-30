@@ -1,7 +1,7 @@
 ---
 title: "【3/31】AIニュース5選 — MCP月間1億DL突破とAIエコシステムの進化"
 description: "Model Context ProtocolがDL1億を突破。AIエージェントの相互運用性が新たなフェーズへ。月曜日のAIニュースをお届けします。"
-pubDate: "2026-03-31"
+pubDate: "2026-04-05"
 tags: ["AIニュース", "MCP", "AIエージェント", "エコシステム"]
 category: "ニュースまとめ"
 ai_generated: true

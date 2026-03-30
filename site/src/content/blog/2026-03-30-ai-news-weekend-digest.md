@@ -1,7 +1,7 @@
 ---
 title: "【3/30】週末AIダイジェスト — 今週のAI業界を振り返る"
 description: "3月最終週のAI業界の動きを総まとめ。Google・Anthropic・OpenAIの最新アップデートから規制動向まで。"
-pubDate: "2026-03-30"
+pubDate: "2026-04-07"
 tags: ["AIニュース", "週末ダイジェスト", "AI業界"]
 category: "ニュースまとめ"
 ai_generated: true
