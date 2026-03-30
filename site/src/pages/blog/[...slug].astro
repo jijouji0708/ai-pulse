@@ -4,6 +4,7 @@ import BlogPost from '../../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
 	const now = new Date();
+	now.setDate(now.getDate() + 1);
 	const posts = (await getCollection('blog')).filter(
 		(post) => post.data.pubDate.valueOf() <= now.valueOf(),
 	);
