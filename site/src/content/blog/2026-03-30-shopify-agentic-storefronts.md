@@ -1,11 +1,11 @@
 ---
-title: "ChatGPTの中で買い物ができる時代 — Shopify Agentic Storefrontsの衝撃"
+title: "ChatGPTの中で買い物ができる時代 — Shopify Agentic Storefrontsの仕組みと影響"
 description: "ShopifyがChatGPT・Gemini・Copilot内での直接販売を開始。AIアシスタント経由のEC「Agentic Storefronts」の仕組みと、ビジネスへの影響を解説します。"
 pubDate: "2026-03-30"
-tags: ["Shopify", "AIコマース", "ChatGPT", "ビジネス"]
+tags: ["Shopify", "AIコマース", "ChatGPT", "ビジネス", "AIエージェント"]
 category: "ビジネス・副業"
 ai_generated: true
-status: "draft"
+status: "reviewed"
 ---
 
 「この革ジャン、いい感じのやつある？」とChatGPTに聞いたら、商品が表示されて、そのまま購入ボタンが出てくる。SFの話ではありません。今月、Shopifyが始めた現実です。
@@ -44,7 +44,7 @@ AIが商品を推薦する判断基準のひとつがユーザーレビューで
 
 ## Shopifyだけの話では終わらない
 
-Amazon、楽天、Alibabaも同様の動きを準備していると見られています。Gartnerの予測では、2026年末までに企業アプリの40%がタスク特化型AIエージェントを搭載する見通しです。ECにおけるAIエージェント統合は、Shopifyの独占ではなく業界全体のトレンドになるでしょう。
+Amazon、楽天、Alibabaも同様の動きを準備していると見られています[未確認]。Gartnerの予測では、2026年末までに企業アプリの40%がタスク特化型AIエージェントを搭載する見通しです。ECにおけるAIエージェント統合は、Shopifyの独占ではなく業界全体のトレンドになるでしょう。
 
 ただし課題もあります。AIが特定の商品を優先的に推薦する「AIバイアス」の問題、返品対応のフロー、プライバシーへの配慮など、まだルールが整っていない領域が多い状態です。
 

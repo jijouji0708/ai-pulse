@@ -5,7 +5,7 @@ pubDate: "2026-03-30"
 tags: ["AIニュース", "Anthropic", "Mistral", "Shopify", "AIエージェント"]
 category: "ニュースまとめ"
 ai_generated: true
-status: "draft"
+status: "reviewed"
 ---
 
 Anthropicが秘密裏にテストしていた次世代AIモデルの名前は「Mythos」。データリークで存在が発覚し、同社は「能力のステップチェンジ」と認めました。
@@ -24,7 +24,7 @@ Anthropicが開発中の新AIモデル「Mythos」の存在が、データリー
 
 ## 2. 「モデル雪崩」— 1週間で12モデルが同時リリース
 
-3月10日から16日の1週間で、OpenAI、Google、xAI、Anthropic、Mistral、Cursorの6社が合計12のモデルをリリースしました。GPT-5.4 Standard、Grok 4.20、Gemini 3.1 Flash-Liteの3つは72時間以内に相次いで登場しています。
+3月10日から16日の1週間で、OpenAI、Google、xAI、Anthropic、Mistral、Cursorの6社が合計12のモデルをリリースしました。GPT-5.4 Standard、Grok 4.20、Gemini 3.1 Flash-Liteの3つは72時間以内に相次いで登場しています[未確認: 各モデル名は出典記事に基づくが、一部名称が異なる可能性あり]。
 
 開発者にとって、モデルの評価・選定サイクルは従来の四半期ペースから月次に短縮されつつあります。「どのモデルを使うか」の判断が、もはや追いつかない速度で迫ってきています。
 
@@ -32,13 +32,13 @@ Anthropicが開発中の新AIモデル「Mythos」の存在が、データリー
 
 出典: [AI Unfiltered](https://www.arturmarkus.com/12-ai-models-launched-in-one-week-during-march-10-16-2026-openai-google-xai-anthropic-mistral-and-cursor-compress-developer-selection-cycles-to-monthly-as-frontier-model-releases-pile-up/)
 
-## 3. Mistral Small 4 — 22Bパラメータで大型モデルに勝利
+## 3. Mistral Small 4 — MoEアーキテクチャで大型モデルに勝利
 
-フランスのMistralがリリースした「Mistral Small 4」は、わずか22Bパラメータ（220億）ながら、3〜5倍のサイズのクローズドモデルを推論・指示追従ベンチマークで上回りました。
+フランスのMistralがリリースした「Mistral Small 4」は、総パラメータ119B（1190億）のMixture-of-Experts（MoE）モデルです。推論時にアクティブになるのは約22B（220億）パラメータのみで、3〜5倍のサイズのクローズドモデルを推論・指示追従ベンチマークで上回りました。
 
-オープンソースで公開されており、自社サーバーでの運用も可能です。大手モデルのAPI料金が高騰する中、「小さくて賢いモデル」の存在感が増しています。
+オープンソースで公開されており、自社サーバーでの運用も可能です。大手モデルのAPI料金が高騰する中、効率的なアーキテクチャで性能を引き出すモデルの存在感が増しています。
 
-**ポイント**: 「大きいほど賢い」という常識が崩れ始めています。コスト重視の企業にとっては有力な選択肢です。
+**ポイント**: 「巨大な密結合モデルほど賢い」という常識が崩れ始めています。MoEのように必要な部分だけを動かす設計は、コスト重視の企業にとって有力な選択肢です。
 
 出典: [MEAN CEO Blog](https://blog.mean.ceo/new-ai-model-releases-news-march-2026/)
 
