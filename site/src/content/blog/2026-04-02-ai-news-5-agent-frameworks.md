@@ -1,7 +1,7 @@
 ---
 title: "【4/2】AIニュース5選 — エージェントフレームワーク最新動向"
 description: "AIエージェント開発フレームワークの進化が加速。LangChain、CrewAI、Claude Agent SDKの最新アップデートと業界動向をまとめました。"
-pubDate: "2026-04-02"
+pubDate: "2026-04-10"
 tags: ["AIニュース", "AIエージェント", "開発フレームワーク", "SDK"]
 category: "ニュースまとめ"
 ai_generated: true
