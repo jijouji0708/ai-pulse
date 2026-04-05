@@ -5,7 +5,7 @@ pubDate: "2026-04-06"
 tags: ["AIニュース", "オープンソース", "AIセキュリティ", "Google", "AWS"]
 category: "ニュースまとめ"
 ai_generated: true
-status: "draft"
+status: "reviewed"
 ---
 
 AIを「借りる」時代から「所有する」時代へ。1週間で4つの高性能モデルがApache 2.0ライセンスで公開されました。スマホからデータセンターまでカバーするオープンソースAIが、APIに月額を払い続ける構造を根本から変えようとしています。
@@ -32,33 +32,33 @@ Google Gemma 4、PrismML Bonsai（1-bit量子化）、H Company Holo3、Arcee Tr
 
 ## 3. Google、仮想試着を検索結果に直接統合（4/30〜）
 
-Googleが4月30日から、検索結果内で仮想試着技術を直接利用できるようにすると発表しました。商品を検索すると、自分の体型に合わせた試着イメージがその場で表示されます。
+Googleが4月30日にAI試着アプリ「Doppl」を終了し、仮想試着機能をGoogle検索・ショッピングに統合します。商品を検索すると、自分の体型に合わせた試着イメージがその場で表示される仕組みです。
 
-先月のShopify Agentic Storefronts（AIチャット内で購入完結）に続き、「検索→試着→購入」がすべてGoogle内で完結する世界が近づいています。実店舗の試着室がデジタル化される日も遠くありません。
+先月のShopify Agentic Storefronts（AIチャット内で購入完結）に続き、「検索→試着→購入」がすべてGoogle内で完結する世界が近づいています。スタンドアロンアプリから検索統合へ — Googleの「検索で完結させる」戦略が鮮明です。
 
 **ポイント**: EC事業者にとって、Googleの仮想試着対応は新たな集客チャネルになり得ます。[ShopifyのAIコマースの話題はこちら](/blog/2026-03-30-shopify-agentic-storefronts/)。
 
-出典: [CNBC](https://www.cnbc.com/2026/04/05/ai-retail-start-ups-virtual-try-on-tech-margins.html)
+出典: [CNBC](https://www.cnbc.com/2026/04/05/ai-retail-start-ups-virtual-try-on-tech-margins.html)、[Jetstream Blog](https://jetstream.blog/en/google-doppl-shut-down-end-of-april-2026/)
 
 ## 4. カリフォルニア州、AI玩具チャットボット禁止法案を審議
 
-カリフォルニア州のSB 867法案が本日4/6に委員会で審議されます。子供向け玩具にAIコンパニオンチャットボットを搭載することを禁止する内容です。
+カリフォルニア州のSB 867法案が委員会で審議中です。12歳以下の子供向け玩具にAIコンパニオンチャットボットを搭載することを4年間禁止する内容です。
 
-AIが子供の心理発達に与える影響への懸念が立法化の動きに繋がっています。カリフォルニア州は昨年のAI透明性法に続き、AI規制の先頭を走っています。
+AIチャットボットとの長時間会話が子供に与えた深刻な事例が訴訟化し、立法の動きに繋がっています。Steve Padilla州上院議員が提出した法案で、カリフォルニア州は昨年のAI透明性法に続き、AI規制の先頭を走っています。
 
 **ポイント**: AI規制は「企業向け」から「消費者保護」、特に「子供の保護」へと対象が広がっています。[AI規制の全体像はこちら](/blog/2026-03-25-ai-regulation-2026/)。
 
-出典: [Transparency Coalition](https://www.transparencycoalition.ai/news/ai-legislative-update-april3-2026)
+出典: [Transparency Coalition](https://www.transparencycoalition.ai/news/ai-legislative-update-april3-2026)、[TechCrunch](https://techcrunch.com/2026/01/06/california-lawmaker-proposes-a-four-year-ban-on-ai-chatbots-in-kids-toys/)
 
 ## 5. イラン攻撃でAWS湾岸リージョンがダウン — クラウド依存の脆弱性
 
-中東の軍事衝突がクラウドインフラに波及し、AWSの湾岸リージョンが影響を受けました。物理的な軍事攻撃がデジタルインフラを停止させるという、地政学とテクノロジーの交差点が現実に起きています。
+イランのドローン・ミサイル攻撃がAWSのバーレーン・ドバイのデータセンターを直撃し、複数のアベイラビリティゾーンが「hard down」状態に陥りました。物理的な軍事攻撃がデジタルインフラを停止させるという、地政学とテクノロジーの交差点が現実に起きています。
 
 多くの企業がクラウドの「高可用性」を前提にシステムを構築していますが、軍事衝突レベルのリスクはSLAの想定外です。マルチリージョン・マルチクラウド戦略の重要性が改めて浮き彫りになりました。
 
 **ポイント**: AIインフラも例外ではありません。推論サーバーが特定リージョンに集中している場合、地政学リスクは事業リスクに直結します。
 
-出典: [The Neuron](https://www.theneuron.ai/explainer-articles/around-the-horn-digest-everything-that-happened-in-ai-today-thursday-april-2-2026-/)
+出典: [The Neuron](https://www.theneuron.ai/explainer-articles/around-the-horn-digest-everything-that-happened-in-ai-today-thursday-april-2-2026-/)、[Tom's Hardware](https://www.tomshardware.com/tech-industry/iranian-missile-blitz-takes-down-aws-data-centers-in-bahrain-and-dubai-amazon-declares-hard-down-status-for-multiple-zones)
 
 ---
 
