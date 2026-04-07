@@ -5,24 +5,24 @@ pubDate: "2026-04-08"
 tags: ["AIニュース", "AI医療", "Gemini", "Mythos", "AI規制"]
 category: "ニュースまとめ"
 ai_generated: true
-status: "draft"
+status: "reviewed"
 ---
 
 AIが薬の処方箋を更新する。SFではなく、ユタ州で始まった現実です。人間の医師を介さずにAIシステムが処方箋を更新する権限を持つ——全米初の事例が、AIと医療の関係を根本から問い直しています。
 
 ## 1. ユタ州、AIによる処方箋更新を全米初で認可
 
-ユタ州が、AIシステムに薬の処方箋更新の権限を付与する全米初の州になりました。慢性疾患の定期処方など、パターンが決まった処方の更新をAIが自動で行うことが法的に認められます。
+ユタ州が、AIシステムに薬の処方箋リフィル（更新）の権限を付与する全米初の州になりました。ヘルステック企業Doctronicとの提携により、慢性疾患の定期処方など190種類の一般的な処方薬のリフィルをAIが自動で行うことが法的に認められます。鎮痛剤やADHD治療薬などは安全上の理由で対象外です。
 
 これまでAIの医療利用は「診断支援」や「画像分析」といった補助的な役割に限られていました。処方箋の更新は**直接的な患者ケア**にあたるため、法的・倫理的なハードルが高い領域です。
 
-**ポイント**: Anthropicが先日バイオAI企業を4億ドルで買収した動きと合わせて、AI×医療は2026年最大のフロンティアの一つです。ただしミスが起きた場合の責任の所在は未整備。[AI規制の全体像はこちら](/blog/2026-03-25-ai-regulation-2026/)。
+**ポイント**: Anthropicが先日バイオAIスタートアップCoefficient Bioを4億ドルで買収した動きと合わせて、AI×医療は2026年最大のフロンティアの一つです。ただしミスが起きた場合の責任の所在は未整備——米国医師会（AMA）も「医師の関与なしではリスクがある」と懸念を表明しています。[AI規制の全体像はこちら](/blog/2026-03-25-ai-regulation-2026/)。
 
-出典: [Crescendo AI](https://www.crescendo.ai/news/latest-ai-news-and-updates)
+出典: [Utah Commerce](https://commerce.utah.gov/2026/01/06/news-release-utah-and-doctronic-announce-groundbreaking-partnership-for-ai-prescription-medication-renewals/)、[Axios Salt Lake City](https://www.axios.com/local/salt-lake-city/2026/01/07/utah-ai-drug-prescriptions-doctronic)
 
 ## 2. Gemini 3.1 Ultra、サンドボックスでコード実行が可能に
 
-GoogleのGemini 3.1 Ultraに、会話中にコードを書いてテストできるサンドボックス「Code Execution」が搭載されました。モデルが自律的にコードを書き、実行結果を確認し、エラーがあれば修正してから応答を返す仕組みです。
+4月5日にリリースされたGoogleのGemini 3.1 Ultraに、会話中にコードを書いてテストできるサンドボックス「Code Execution」が搭載されました。モデルが自律的にコードを書き、実行結果を確認し、エラーがあれば修正してから応答を返す仕組みです。
 
 従来の「コードを生成して人間がコピペして実行」という手順が不要になり、AIが**回答の正確性を自分で検証**できるようになります。特に数値計算やデータ分析の分野で精度が大幅に向上すると見られています。
 
